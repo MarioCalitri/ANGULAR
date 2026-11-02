@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { Product } from '../product'
 
 @Component({
-  imports: [],
+  imports: [CommonModule],
   selector: 'app-product-detail',
   styleUrl: './product-detail.component.css',
   templateUrl: './product-detail.component.html',
