@@ -3,7 +3,7 @@
 } 
 
 <ul class="pill-group">
-    @for (products of products; track products.id) {
+    @for (products of products | sort:'price'; track products.id) {
         <li class="pill" (click)="selectedProduct = products">
             @switch (products.title) {
                 @case ('Keyboard') { ⌨️ }

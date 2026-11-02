@@ -1,13 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
+import { CopyrightDirective } from './copyright.directive';
+import { AppNumericDirective } from './numeric.directive';
 
 @Component({
-  imports: [RouterOutlet, ProductListComponent],
   selector: 'app-root',
-  styleUrl: './app.component.css',
+  imports: [RouterOutlet, ProductListComponent, CopyrightDirective, AppNumericDirective],
   templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
-export class App {
-  protected readonly title = signal('ch03-2026am');
+export class AppComponent {
+  title = 'ch03-2026am';
 }
