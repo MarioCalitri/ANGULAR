@@ -1,8 +1,8 @@
-import { Numeric } from './numeric.directive';
+import { NumericDirective } from './numeric.directive';
 
-describe('Numeric', () => {
+describe('NumericDirective', () => {
   it('should create an instance', () => {
-    const directive = new Numeric();
+    const directive = new NumericDirective();
     expect(directive).toBeTruthy();
   });
 });

@@ -1,13 +1,12 @@
 @if (product()) {
     <div>
         <p>
-            You seleceted:
+            You selected:
             <strong>{{productTitle}}</strong>
         </p>
         <p>{{product()!.price | currency:'CAD'}}</p>
-        <p>{{product()!.price | currency:'EUR'}}</p>
         <div class="pill-group">
-            @for (cat of product()!.categories | keyvalue; track cat.key) 
+            @for (cat of product()!.categories | keyvalue; track cat.key)
             {
                 <p class="pill">
                     {{cat.value | lowercase}}

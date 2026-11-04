@@ -3,7 +3,7 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 @Directive({
   selector: '[appNumeric]'
 })
-export class AppNumericDirective {
+export class NumericDirective {
 
   @HostBinding('class') currentClass = '';
 
@@ -12,11 +12,12 @@ export class AppNumericDirective {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       this.currentClass = 'invalid';
       event.preventDefault();
-    } 
+    }
     else {
       this.currentClass = 'valid';
     }
   }
 
-  Constructor() { }
+  constructor() { }
+
 }

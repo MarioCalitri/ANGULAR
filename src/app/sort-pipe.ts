@@ -1,24 +1,30 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product} from './product';
+import { Product } from './product';
 
 @Pipe({
-  name: 'sort',
+  name: 'sort'
 })
 export class SortPipe implements PipeTransform {
   
   transform(value: Product[], args: keyof Product = 'title'): Product[] {
-    if (value) {
+    if (value)
+    {
       return value.sort((a: Product, b: Product) => {
         if (a[args] < b[args]) {
           return -1;
-        } else if (a[args] > b[args]) {
+        }
+        else if (b[args] < a[args])
+        {
           return 1;
-        } else {
+        }
+        else
+        {
           return 0;
         }
       });
     }
     return [];
-  }
-}
 
+  }
+
+}

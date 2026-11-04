@@ -1,20 +1,19 @@
-import { Injectable} from '@angular/core';
-import { Product } from './product';``
+import { Injectable } from '@angular/core';
+import { Product } from './product';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class ProductsService {
 
-    constructor() { }
+  constructor() { }
 
-    getProducts(): Product[] {
-        return [
-            { id: 1, title: 'Keyboard', price: 100, categories: { 1: 'Computing', 2: 'Peripherals' } },
-            { id: 2, title: 'Microphone', price: 35, categories: { 3: 'Multimedia' },},
-            { id: 3, title: 'Webcam', price: 79, categories: { 1: 'Computing', 3: 'Multimedia' } },
-            { id: 4, title: 'Tablet', price: 500, categories: { 4: 'Entertainment' } }
-        ]
-    }
-    
+  getProducts(): Product[] {
+    return [
+      { id: 1, title: 'Keyboard', price: 100,  categories: { 1: 'Computing', 2: 'Peripherals' } },
+      { id: 2, title: 'Microphone', price: 35,  categories: { 3: 'Multimedia' } },
+      { id: 3, title: 'Web Camera', price: 79,  categories: { 1: 'Computing', 3: 'Multimedia' } },
+      { id: 4, title: 'Tablet', price: 500,  categories: { 4: 'Entertainment' } }
+    ]
+  }
+
 }

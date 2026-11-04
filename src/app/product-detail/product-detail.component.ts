@@ -3,18 +3,18 @@ import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } 
 import { Product } from '../product'
 
 @Component({
-  imports: [CommonModule],
   selector: 'app-product-detail',
-  styleUrl: './product-detail.component.css',
+  imports: [CommonModule],
   templateUrl: './product-detail.component.html',
-  encapsulation: ViewEncapsulation.None, 
+  styleUrl: './product-detail.component.css',
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent {
   product = input<Product>();
 
   added = output<Product>();
-  
+
   addToCart() {
     this.added.emit(this.product()!);
   }
