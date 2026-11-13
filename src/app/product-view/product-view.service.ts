@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { Product } from '../product';
+import { Observable, map } from 'rxjs';
 
 @Injectable()
 
@@ -10,12 +11,9 @@ export class ProductViewService {
 
   constructor(private productService: ProductsService) { }
 
-  getProduct(id: number) : Product | undefined {
-    const products = this.productService.getProducts();
-    if (!this.product) {
-      this.product = products.find(product => product.id === id)
-    }
-    return this.product;
+getProduct(id: number): Observable<Product | undefined> {
+    return this.productService.getProducts().pipe(
+      map(products => products.find(product => product.id === id))
+    );
   }
-
 }

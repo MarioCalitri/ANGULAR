@@ -1,11 +1,14 @@
-<header>{{ title }}</header>
+
+<header style="padding: 10px; background: #f0f0f0; text-align: center;">
+  <h2>{{ title() }}</h2>
+</header>
+
 <main class="main">
   <div class="content">
     <app-product-list></app-product-list>
   </div>
 </main>
-<footer appCopyright> - v{{ settings.version }}</footer>
-
+<footer appCopyright> v{{ settings.version }}</footer>
 <input appNumeric />
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -18,4 +21,4 @@
 
 
 <router-outlet />
-<app-key-logger></app-key-logger>
+<app-key-logger [numeric]="true"></app-key-logger>

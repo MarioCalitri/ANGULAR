@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
 import { APP_SETTINGS, appSettings } from './app.settings';
-import { Observable } from 'rxjs';
+import { interval, map } from 'rxjs';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
 
 @Component({
@@ -17,40 +17,17 @@ import { KeyLoggerComponent } from './key-logger/key-logger.component';
   ]
 })
 export class AppComponent {
-  title = 'ch03-2026am';
+  title = signal('ch03-2026am');
   settings = inject(APP_SETTINGS);
 
-  private setTitle = () => {
-    const timestamp = new Date();
-    this.title = `${this.settings.title} - ${{timestamp}}`;
-  }
-
-  private changeTitle(callback: Function) {
-    setTimeout(() => {
-      callback();
-    }, 2000)
-  }
   constructor() {
-    //this.changeTitle(this.setTitle); // using callbacks
-    //this.onComplete().then(this.setTitle) // better way
-    this.title$.subscribe(this.setTitle)
-  }
-
-  private onComplete() {
-    return new Promise<void>(resolve => {
-      setInterval(() => {
-        this.title = this.settings.title;
-        resolve();
-      }, 2000);
+    interval(2000).pipe(
+      map(() => {
+        const timestamp = new Date();
+        return `${this.settings.title} - ${timestamp.toLocaleTimeString()}`;
+      })
+    ).subscribe(newTitle => {
+      this.title.set(newTitle);
     });
-
-}
-
-title$ = new Observable(observer => {
-  setInterval(() => {
-    observer.next(this.setTitle);
-  }, 2000);
-});
-
-
+  }
 }

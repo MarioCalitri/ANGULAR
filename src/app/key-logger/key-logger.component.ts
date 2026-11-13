@@ -1,20 +1,30 @@
-import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Component, ElementRef, viewChild, input, afterNextRender, signal } from '@angular/core';
+import { fromEvent, tap, map, filter } from 'rxjs';
 
 @Component({
-  imports: [],
   selector: 'app-key-logger',
-  styleUrl: './key-logger.component.css',
+  imports: [],
   templateUrl: './key-logger.component.html',
+  styleUrl: './key-logger.component.css'
 })
-export class KeyLoggerComponent implements OnInit {
+export class KeyLoggerComponent {
+  input = viewChild.required<ElementRef>('KeyContainer');
+  keys = signal('');
+  numeric = input(false);
 
-  input = viewChild<ElementRef>('keyContainer');
-
-  keys = '';
-
-  ngOnInit(): void {
-    const logger$ = fromEvent<KeyboardEvent>(this.input()!.nativeElement, 'keyup');
-    logger$.subscribe(evt => this.keys += evt.key);
-    }
+  constructor() {
+    afterNextRender(() => {
+      const logger$ = fromEvent<KeyboardEvent>(this.input().nativeElement, 'keyup');
+      logger$.pipe(
+        map(evt => evt.key.charCodeAt(0)),
+        filter(code => {
+          if (this.numeric()) {
+            return code >= 48 && code <= 57;
+          }
+          return true;
+        }),
+        tap(digit => this.keys.update(k => k + String.fromCharCode(digit)))
+      ).subscribe();
+    });
+  }
 }
